@@ -16,6 +16,17 @@ type BookCardProps = {
   books: Book[];
 };
 
+type SortCheckBoxesType = {
+  label: string;
+  value: SortType;
+};
+
+const sortCheckBoxes: SortCheckBoxesType[] = [
+  { label: "Newest", value: "newest" },
+  { label: "Ascending", value: "asc" },
+  { label: "Descending", value: "desc" },
+];
+
 const BookCardList = ({ books }: BookCardProps) => {
   return (
     <div className="w-full px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
@@ -107,38 +118,23 @@ const BookDisplay = () => {
         </div>
 
         <div className=" flex flex-row gap-4 items-center text-xs sm:text-sm">
-          <input
-            id="newest"
-            type="checkbox"
-            checked={sort === "newest"}
-            onChange={() => dispatch(setSort("newest"))}
-            className=" w-6 h-6  accent-drim_yellow"
-          />
-          <label htmlFor="newest" className="text-drim_dark font-semibold">
-            Newest
-          </label>
-
-          <input
-            id="asc"
-            type="checkbox"
-            checked={sort === "asc"}
-            onChange={() => dispatch(setSort("asc"))}
-            className=" w-6 h-6 accent-drim_yellow"
-          />
-          <label htmlFor="asc" className="text-drim_dark font-semibold">
-            Ascending
-          </label>
-
-          <input
-            id="desc"
-            type="checkbox"
-            checked={sort === "desc"}
-            onChange={() => dispatch(setSort("desc"))}
-            className=" w-6 h-6 accent-drim_yellow"
-          />
-          <label htmlFor="desc" className="text-drim_dark font-semibold">
-            Descending
-          </label>
+          {sortCheckBoxes.map((item) => (
+            <>
+              <input
+                id={item.value}
+                type="checkbox"
+                checked={sort === item.value}
+                onChange={() => dispatch(setSort(item.value))}
+                className=" w-6 h-6  accent-drim_yellow"
+              />
+              <label
+                htmlFor={item.value}
+                className="text-drim_dark font-semibold"
+              >
+                {item.label}
+              </label>
+            </>
+          ))}
         </div>
       </div>
 

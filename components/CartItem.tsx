@@ -11,6 +11,7 @@ import {
 
 import { BookStore } from "@/types/types";
 import { useAppDispatch } from "@/hooks/hook";
+import Link from "next/link";
 
 export const FormattedPrice = ({ amount }: { amount: number }) => {
   const formattedAmount = new Number(amount).toLocaleString("en-US", {
@@ -38,17 +39,23 @@ const CartItem = ({ item }: { item: BookStore }) => {
   return (
     <div className="bg-gray-100 rounded-lg flex flex-col items-start  md:items-center gap-4 md:justify-between p-4 md:p-2 md:flex-row">
       <div>
-        <Image
-          className="object-cover mx-auto"
-          width={150}
-          height={150}
-          src={item.image}
-          alt={item.title + "Image"}
-        />
+        <Link href={`/book/${item.isbn13}`}>
+          <Image
+            className="object-cover mx-auto"
+            width={150}
+            height={150}
+            src={item.image}
+            alt={item.title + "Image"}
+          />
+        </Link>
       </div>
       <div className="flex items-center px-2 gap-4 flex-col md:flex-row">
         <div className="flex flex-col gap-1">
-          <p className=" font-semibold text-drim_dark text-sm">{item.title}</p>
+          <Link href={`/book/${item.isbn13}`}>
+            <p className=" font-semibold text-drim_dark text-sm hover:text-blue-600">
+              {item.title}
+            </p>
+          </Link>
 
           <p className="text-sm text-gray-600">
             Unit Price{" "}

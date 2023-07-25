@@ -6,11 +6,20 @@ import { useAppDispatch, useAppSelector } from "@/hooks/hook";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect } from "react";
 import { addUser, removeUser } from "@/store/nextSlice";
+import { BookStore } from "@/types/types";
+
+const getTotalItems = (bookData: BookStore[]) => {
+  return bookData.reduce((acc, book) => {
+    acc += book.quantity;
+    return acc;
+  }, 0);
+};
 
 const NavBar = () => {
   const { bookData, userInfo } = useAppSelector((state) => state.next);
   const { data: session } = useSession();
   const dispatch = useAppDispatch();
+  const totalItems = getTotalItems(bookData);
 
   useEffect(() => {
     if (session) {
@@ -77,8 +86,8 @@ const NavBar = () => {
             <p className="hidden md:block text-xs text-white font-bold mt-3">
               Cart
             </p>
-            <span className="absolute text-drim_yellow text-xs sm:text-sm -top-1 sm:left-[22px] left-[18px] font-semibold">
-              {bookData ? bookData.length : 0}
+            <span className="absolute text-drim_yellow text-xs sm:text-sm -top-0.5 sm:left-[22px] left-[18px] font-semibold">
+              {bookData.length > 0 ? totalItems : 0}
             </span>
           </Link>
 

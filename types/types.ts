@@ -16,16 +16,10 @@ export interface BookStore extends Book {
   quantity: number;
 }
 
-// export interface StateProps {
-//   bookData: [];
-//   userInfo: null | string;
-//   next: any;
-// }
-
 export interface User {
   name: string | null | undefined;
   email: string | null | undefined;
-  image: string | null | undefined;
+  image?: string | null | undefined;
 }
 
 export interface BookDetail extends Book {

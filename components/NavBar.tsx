@@ -43,7 +43,7 @@ const NavBar = () => {
       <div className="h-full w-full mx-auto flex items-center justify-between gap-1 mdl:gap-3 px-4">
         <Link
           href={"/"}
-          className="px-2 text-drim_white border border-transparent hover:border-white cursor-pointer duration-300 h-[70%] font-bold text-xl md:text-4xl mt-1"
+          className="p-2.5 text-drim_white border border-transparent hover:border-white cursor-pointer duration-300 h-[70%] font-bold text-xl md:text-4xl mt-1"
         >
           DRIMBOOKS
         </Link>
